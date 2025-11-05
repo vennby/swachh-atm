@@ -95,6 +95,27 @@
       <footer class="mt-6 text-center text-xs text-slate-500">Prototype • Not for production use • Built with ♻️</footer>
     </div>
 
+    <!-- Login/Register Modal -->
+<div id="auth-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+  <div class="bg-white rounded-2xl shadow-lg p-6 w-80">
+    <h2 id="auth-title" class="text-lg font-bold mb-3">Login</h2>
+    <form id="auth-form" class="space-y-3">
+      <div>
+        <label class="text-sm text-gray-600">Phone</label>
+        <input id="auth-phone" type="text" class="w-full border rounded-lg px-3 py-2" required />
+      </div>
+      <div>
+        <label class="text-sm text-gray-600">Password</label>
+        <input id="auth-pass" type="password" class="w-full border rounded-lg px-3 py-2" required />
+      </div>
+      <button id="auth-submit" type="submit" class="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600">Login</button>
+      <p class="text-center text-sm text-gray-500">
+        <span id="auth-switch">No account? <button type="button" class="text-emerald-600">Register</button></span>
+      </p>
+    </form>
+  </div>
+</div>
+
     <script src="/static/app.js"></script>
   </body>
 </html>

@@ -1,21 +1,97 @@
 {% extends "base.html" %}
 {% block title %}Dashboard | Swachh ATM{% endblock %}
+
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Welcome, {{ request.query_params.get('user', 'User') }}</h1>
+<div class="px-4 md:px-8 py-6">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <h1 class="text-3xl font-extrabold text-gray-800">Welcome, Venn!</h1>
+    <span class="text-sm text-gray-500 mt-2 md:mt-0">Last login: Sunday, 11.59 AM IST</span>
+  </div>
 
-<div id="points-card" class="bg-white p-4 rounded-2xl shadow mb-4 text-center">
-  <h2 class="text-gray-600 text-sm">Your Points</h2>
-  <div id="points" class="text-4xl font-extrabold text-emerald-600 mt-2">0</div>
+  <!-- Top Stats Grid -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-2xl shadow p-4 text-center">
+      <h2 class="text-gray-500 text-sm">Your Points</h2>
+      <div id="points" class="text-3xl font-bold text-emerald-600 mt-2">1969</div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-4 text-center">
+      <h2 class="text-gray-500 text-sm">Total Deposits</h2>
+      <div class="text-3xl font-bold text-blue-600 mt-2">37</div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-4 text-center">
+      <h2 class="text-gray-500 text-sm">Current Rank</h2>
+      <div class="text-3xl font-bold text-yellow-500 mt-2">#12</div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-4 text-center">
+      <h2 class="text-gray-500 text-sm">Active City</h2>
+      <div class="text-3xl font-bold text-purple-600 mt-2">Hyderabad</div>
+    </div>
+  </div>
+
+  <!-- Middle Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Chart -->
+    <div class="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4 self-start">Waste Type Breakdown</h2>
+      <div class="relative w-full" style="height: 240px;"> <!-- fixed height container -->
+        <canvas id="waste-chart" class="absolute top-0 left-0 w-full h-full"></canvas>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Deposits</h2>
+      <ul class="divide-y divide-gray-100">
+        <li class="py-3 flex justify-between items-center">
+          <span class="text-sm text-gray-600">Plastic • 2.4kg</span>
+          <span class="text-emerald-600 text-sm font-semibold">+24 pts</span>
+        </li>
+        <li class="py-3 flex justify-between items-center">
+          <span class="text-sm text-gray-600">E-waste • 1.1kg</span>
+          <span class="text-emerald-600 text-sm font-semibold">+15 pts</span>
+        </li>
+        <li class="py-3 flex justify-between items-center">
+          <span class="text-sm text-gray-600">Paper • 3.7kg</span>
+          <span class="text-emerald-600 text-sm font-semibold">+37 pts</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Action Button -->
+  <div class="text-center mt-8">
+    <button id="btn-deposit"
+      class="bg-emerald-500 text-white px-8 py-3 rounded-xl shadow-md hover:bg-emerald-600 hover:scale-105 transition">
+      ♻️ Simulate New Deposit
+    </button>
+  </div>
 </div>
 
-<div class="bg-white p-4 rounded-2xl shadow mb-4">
-  <h2 class="text-gray-600 text-sm mb-2">Waste Type Breakdown</h2>
-  <canvas id="waste-chart" width="400" height="200"></canvas>
-</div>
-
-<div class="text-center">
-  <button id="btn-deposit" class="bg-emerald-500 text-white px-6 py-2 rounded-xl shadow hover:scale-105 transition">Simulate Deposit</button>
-</div>
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/static/charts.js"></script>
+<script>
+const ctx = document.getElementById('waste-chart').getContext('2d');
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Plastic', 'Paper', 'Metal', 'E-Waste', 'Other'],
+    datasets: [{
+      data: [35, 25, 20, 10, 10],
+      backgroundColor: ['#34d399', '#60a5fa', '#fbbf24', '#a78bfa', '#f87171'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: {
+      legend: { position: 'bottom' }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+</script>
 {% endblock %}

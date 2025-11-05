@@ -6,7 +6,7 @@ import uuid, datetime
 from sqlalchemy.orm import Session
 
 from db import engine, SessionLocal, database
-from models import Base, User, Machine, Transaction, UserCreate, DepositIn, TransactionOut
+from models import Base, User, Machine, Transaction, UserCreate, DepositIn, TransactionOut, LoginIn
 from auth import hash_password, verify_password, create_access_token, get_current_user
 
 Base.metadata.create_all(bind=engine)
@@ -130,3 +130,12 @@ def rewards_page(request: Request):
 @app.get("/admin", response_class=HTMLResponse)
 def admin_page(request: Request):
     return templates.TemplateResponse("admin.html", {"request": request})
+
+@app.post("/api/login")
+def login(login_data: LoginIn, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.phone == login_data.phone).first()
+    if not user or not verify_password(login_data.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    token = create_access_token({"sub": user.id, "name": user.name, "phone": user.phone})
+    return {"access_token": token, "token_type": "bearer"}
+

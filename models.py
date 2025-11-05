@@ -56,3 +56,7 @@ class DepositIn(BaseModel):
 
 class TransactionOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+
+class LoginIn(BaseModel):
+    phone: str
+    password: str
