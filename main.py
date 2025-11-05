@@ -110,3 +110,23 @@ def leaderboard(db: Session = Depends(get_db)):
     # top 20 users by points
     users = db.query(User).order_by(User.points.desc()).limit(20).all()
     return [{"id": u.id, "name": u.name, "points": u.points} for u in users]
+
+@app.get("/dashboard", response_class=HTMLResponse)
+def dashboard(request: Request):
+    return templates.TemplateResponse("dashboard.html", {"request": request})
+
+@app.get("/leaderboard", response_class=HTMLResponse)
+def leaderboard_page(request: Request):
+    return templates.TemplateResponse("leaderboard.html", {"request": request})
+
+@app.get("/transactions", response_class=HTMLResponse)
+def transactions_page(request: Request):
+    return templates.TemplateResponse("transactions.html", {"request": request})
+
+@app.get("/rewards", response_class=HTMLResponse)
+def rewards_page(request: Request):
+    return templates.TemplateResponse("rewards.html", {"request": request})
+
+@app.get("/admin", response_class=HTMLResponse)
+def admin_page(request: Request):
+    return templates.TemplateResponse("admin.html", {"request": request})

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | Swachh ATM{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Welcome, {{ request.query_params.get('user', 'User') }}</h1>
+
+<div id="points-card" class="bg-white p-4 rounded-2xl shadow mb-4 text-center">
+  <h2 class="text-gray-600 text-sm">Your Points</h2>
+  <div id="points" class="text-4xl font-extrabold text-emerald-600 mt-2">0</div>
+</div>
+
+<div class="bg-white p-4 rounded-2xl shadow mb-4">
+  <h2 class="text-gray-600 text-sm mb-2">Waste Type Breakdown</h2>
+  <canvas id="waste-chart" width="400" height="200"></canvas>
+</div>
+
+<div class="text-center">
+  <button id="btn-deposit" class="bg-emerald-500 text-white px-6 py-2 rounded-xl shadow hover:scale-105 transition">Simulate Deposit</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/charts.js"></script>
+{% endblock %}
