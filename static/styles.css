@@ -1,0 +1,10 @@
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+#btn-login { transition: transform .18s ease; }
+#btn-login:hover { transform: translateY(-2px); }
+
+/* confetti-ish microanimation used during deposit success */
+@keyframes pop {
+  0% { transform: translateY(0) scale(1); opacity: 1 }
+  100% { transform: translateY(-24px) scale(1.1); opacity: 0 }
+}

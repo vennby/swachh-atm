@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swachh ATM — Prototype</title>
+    <!-- Tailwind CDN for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="bg-gradient-to-b from-sky-50 to-white min-h-screen">
+    <div class="max-w-3xl mx-auto p-4">
+      <!-- Header -->
+      <header class="flex items-center justify-between py-4">
+        <div class="flex items-center gap-3">
+          <!-- logo circle -->
+          <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-green-400 to-teal-500 flex items-center justify-center shadow-lg">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7h18"></path>
+              <path d="M6 7v10"></path>
+              <path d="M10 11v6"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold">Swachh ATM</h1>
+            <p class="text-xs text-slate-600">Points, leaderboards & rewards</p>
+          </div>
+        </div>
+        <div>
+          <button id="btn-login" class="px-3 py-2 bg-white rounded-lg shadow">Login</button>
+        </div>
+      </header>
+
+      <!-- Hero -->
+      <section class="bg-white rounded-2xl p-6 shadow-md mt-4">
+        <div class="flex flex-col md:flex-row gap-6 items-center">
+          <div class="flex-1">
+            <h2 class="text-2xl md:text-3xl font-extrabold">Turn waste into rewards ♻️</h2>
+            <p class="mt-2 text-slate-600">Scan a Swachh ATM, deposit responsibly, earn points and climb the leaderboard with friends.</p>
+            <div class="mt-4 flex gap-3">
+              <button id="btn-scan" class="px-4 py-2 rounded-lg bg-emerald-500 text-white shadow hover:scale-105 transform">Simulate Deposit</button>
+              <button id="btn-dashboard" class="px-4 py-2 rounded-lg border">My Dashboard</button>
+            </div>
+          </div>
+          <!-- illustration -->
+          <div class="w-48 h-48 flex-shrink-0">
+            <!-- fancy SVG: recycle + coin -->
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#34d399"/>
+                  <stop offset="100%" stop-color="#06b6d4"/>
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="90" fill="url(#g1)" opacity="0.12" />
+              <g transform="translate(40,40)">
+                <rect x="5" y="60" width="90" height="50" rx="8" fill="#fff" opacity="0.95" />
+                <circle cx="60" cy="35" r="18" fill="#f59e0b" />
+                <path d="M10 20 L25 10 L40 20" stroke="#0f172a" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mini dashboard -->
+      <section id="mini-dashboard" class="mt-6 grid grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded-xl shadow flex flex-col">
+          <div class="text-sm text-slate-500">My points</div>
+          <div id="my-points" class="mt-2 text-2xl font-bold">0</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow flex flex-col">
+          <div class="text-sm text-slate-500">Recent deposit</div>
+          <div id="recent-deposit" class="mt-2 text-sm text-slate-700">—</div>
+        </div>
+      </section>
+
+      <!-- Leaderboard -->
+      <section class="mt-6 bg-white p-4 rounded-xl shadow">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold">Leaderboard</h3>
+          <button id="btn-refresh" class="text-sm text-slate-500">Refresh</button>
+        </div>
+        <ol id="leaderboard-list" class="mt-4 space-y-2">
+          <!-- JS will populate -->
+        </ol>
+      </section>
+
+      <!-- Transactions -->
+      <section class="mt-6 bg-white p-4 rounded-xl shadow">
+        <h3 class="font-semibold">Recent transactions</h3>
+        <ul id="transactions-list" class="mt-3 space-y-2 text-sm text-slate-700"></ul>
+      </section>
+
+      <footer class="mt-6 text-center text-xs text-slate-500">Prototype • Not for production use • Built with ♻️</footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
